@@ -7,15 +7,18 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 
 public class SentenceTuples implements Iterable<Tuple> {
+    public final String sentence;
     public final ImmutableList<Tuple> tuples;
 
-    public SentenceTuples(ImmutableList<Tuple> tuples) {
+    public SentenceTuples(String sentence, ImmutableList<Tuple> tuples) {
+        this.sentence = sentence;
         this.tuples = tuples;
     }
 
-    public SentenceTuples(Iterable<Tuple> tuples) {
+    public SentenceTuples(String sentence, Iterable<Tuple> tuples) {
         ImmutableList.Builder<Tuple> builder = ImmutableList.builder();
         builder.addAll(tuples);
+        this.sentence = sentence;
         this.tuples = builder.build();
     }
 

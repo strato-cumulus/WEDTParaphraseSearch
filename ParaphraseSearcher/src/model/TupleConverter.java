@@ -6,6 +6,7 @@ import model.labelled.Frame;
 import model.labelled.Sentence;
 import model.labelled.Span;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -14,7 +15,7 @@ import java.util.stream.StreamSupport;
  */
 public class TupleConverter {
 
-    public static Iterable<SentenceTuples> fromSentences(Iterable<Sentence> sentences) {
+    public static List<SentenceTuples> fromSentences(Iterable<Sentence> sentences) {
         return StreamSupport.stream(sentences.spliterator(), false).map(TupleConverter::fromSentence).collect(Collectors.toList());
     }
 
@@ -26,7 +27,7 @@ public class TupleConverter {
             ImmutableList<Argument> arguments = fromAnnotationSet(frame.annotationSets);
             builder.add(new Tuple(name, spans, arguments));
         }
-        return new SentenceTuples(builder.build());
+        return new SentenceTuples(String.join(" ", sentence.tokens), builder.build());
     }
 
     private static ImmutableList<Argument> fromAnnotationSet(Iterable<AnnotationSet> annotationSets) {

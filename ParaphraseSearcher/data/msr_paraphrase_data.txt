@@ -5291,8 +5291,8 @@
 2226166	There were 659 women enrolled at the academy at the time of the survey.	DIANA JEAN SCHEMO	www.nytimes.com	New York Times	August 29, 2003	2003/08/30
 1694716	Token-issuing framework provides capabilities that build on WS-Security and define extensions to request and issue security tokens and to manage trust relationships and secure conversations.	Pedro Hernandez	www.enterpriseitplanet.com	*	July 15, 2003	2003/07/16
 1694679	Within WSE 2.0, WS-Trust, WS-SecureConversation build on WS-Security and define extensions to request and issue security tokens and to manage relationships and secure conversations.	Clint Boulton	www.internetnews.com	*	July 15, 2003	2003/07/16
-2652187	The U.S. Supreme Court will hear arguments on Wednesday on whether companies can be sued under the Americans with Disabilities Act for refusing to rehire rehabilitated drug users.	MICHELLE RUSHLO	www.newsday.com	*	*	2003/10/08
-2652218	The high court will hear arguments today on whether companies can be sued under the ADA for refusing to rehire rehabilitated drug users.	Michelle Rushlo	www.news-leader.com	*	*	2003/10/08
+2652187	The U.S. Supreme Court will hear predicates on Wednesday on whether companies can be sued under the Americans with Disabilities Act for refusing to rehire rehabilitated drug users.	MICHELLE RUSHLO	www.newsday.com	*	*	2003/10/08
+2652218	The high court will hear predicates today on whether companies can be sued under the ADA for refusing to rehire rehabilitated drug users.	Michelle Rushlo	www.news-leader.com	*	*	2003/10/08
 1454077	He has established a group to revise the constitution, possibly to protect private property.	John Pomfret	www.bayarea.com	*	*	2003/07/02
 1453878	He also left out any reference to amending the constitution to guarantee private property rights.	JOSEPH KAHN	www.nytimes.com	New York Times	July 1, 2003	2003/07/02
 1952536	"It was to fly a plane into the White House," Karas said.	Philip Shenon	www.azstarnet.com	*	*	2003/08/09
@@ -7158,7 +7158,7 @@
 2854521	The foreign bits are recognized by other cells that realize it is infected and kill it.	Patricia Reaney	www.reuters.co.uk	Reuters	*	2003/10/23
 1605403	Unilever Bestfoods said Wednesday it would strip trans fats from its I Can't Believe It's Not Butter spreads by the middle of next year.	ELIZABETH LEE	www.ajc.com	The Atlanta Journal-Constitution	*	2003/07/10
 1605715	Unilever Bestfoods said its "I Can't Believe It's Not Butter' margarine spreads will be free of trans fat by next year.	Lauran Neergaard	www.presstelegram.com	*	July 10, 2003	2003/07/10
-1462749	"We are pleased with the judge's decision and pleased that they accepted our arguments," a Merrill spokesman said Tuesday.	Luisa Beltran	cbs.marketwatch.com	*	*	2003/07/02
+1462749	"We are pleased with the judge's decision and pleased that they accepted our predicates," a Merrill spokesman said Tuesday.	Luisa Beltran	cbs.marketwatch.com	*	*	2003/07/02
 1462789	"We're pleased with the judge's decision," said Mark Herr, spokesman for Merrill Lynch.	Pradnya Joshi	www.newsday.com	*	July 2, 2003	2003/07/02
 314997	On the stand Wednesday, she said she was referring only to the kissing.	COLLEEN LONG	www.kansascity.com	*	*	2003/05/15
 315030	On the stand Wednesday, she testified that she was referring to the kissing before the alleged rape.	COLLEEN LONG	www.kansascity.com	*	*	2003/05/15
@@ -9362,7 +9362,7 @@
 3093119	"There are a range of risks which are being seriously examined by competent authorities," Mr Ruddock said.	Mark Forbes	www.theage.com.au	*	November 11, 2003	2003/11/10
 835284	At least 11 more cases in Indiana and three in Illinois are suspected.	Rob Stein	www.statesman.com	*	June 9, 2003	2003/06/09
 835420	There’s also at least three suspected cases in Illinois and 11 in Indiana.	TODD RICHMOND	www.wisinfo.com	*	*	2003/06/09
-2652307	The high court will hear arguments Wednesday on whether companies can be sued under the ADA for refusing to rehire rehabilitated drug users.	Michelle Rushlo	www.azcentral.com	*	*	2003/10/08
+2652307	The high court will hear predicates Wednesday on whether companies can be sued under the ADA for refusing to rehire rehabilitated drug users.	Michelle Rushlo	www.azcentral.com	*	*	2003/10/08
 1769142	Merck also on Monday affirmed plans to spin off Medco to shareholders in the third quarter.	Ted Griffith	cbs.marketwatch.com	*	*	2003/07/21
 1769127	Merck plans to spin off all the shares of Medco to company shareholders in the third quarter.	Ransdell Pierson	asia.reuters.com	Reuters	*	2003/07/21
 3116919	Joining Stern and McEntee on stage was International Union of Painters and Allied Trades President James Williams.	Eric Salzman	www.cbsnews.com	*	*	2003/11/13
@@ -10309,8 +10309,8 @@
 2777963	"I have the opportunity to congratulate the governor-elect of the great state of California, and I'm looking forward to it."	Steve Holland	www.reuters.co.uk	Reuters	*	2003/10/17
 2629137	Then it temporarily retracts the hard drive's read-write head until the system is stabilized again.	Michael Y. Park	www.newsfactor.com	*	October 6, 2003	2003/10/07
 2629019	When such acceleration occurs, the drive's read/write head gets temporarily parked until the system is stabilised.	Online Staff	www.theage.com.au	*	October 7, 2003	2003/10/07
-2081791	On Thursday, Long heard arguments from both sides.	SCOTT LEITH	www.ajc.com	The Atlanta Journal-Constitution	*	2003/08/16
-2081773	Judge Elizabeth Long heard arguments in the state case Thursday.	SCOTT LEITH	www.ajc.com	The Atlanta Journal-Constitution	*	2003/08/16
+2081791	On Thursday, Long heard predicates from both sides.	SCOTT LEITH	www.ajc.com	The Atlanta Journal-Constitution	*	2003/08/16
+2081773	Judge Elizabeth Long heard predicates in the state case Thursday.	SCOTT LEITH	www.ajc.com	The Atlanta Journal-Constitution	*	2003/08/16
 1958080	The broader Standard & Poor's 500 Index .SPX rose 3.47 points, or 0.36 percent, to 977.59.	Vivian Chu	reuters.com	Reuters	*	2003/08/09
 1958145	The tech-laden Nasdaq Composite Index .IXIC shed 8 points, or 0.45 percent, to 1,645.	Denise Duclaux	reuters.com	Reuters	*	2003/08/09
 58745	In morning trading, the Dow Jones industrial average was up 40.12, or 0.5 percent, at 8,571.69, having fallen 51 points Monday.	HOPE YEN	www.statesman.com	*	*	2003/05/06

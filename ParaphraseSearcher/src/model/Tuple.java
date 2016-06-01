@@ -1,7 +1,6 @@
 package model;
 
 import com.google.common.collect.ImmutableList;
-import com.google.inject.Inject;
 import service.ThesaurusService;
 
 import java.io.IOException;
@@ -14,19 +13,19 @@ public class Tuple {
 
     private final String name;
     private final ImmutableList<String> spans;
-    private final ImmutableList<Argument> arguments;
+    private final ImmutableList<Argument> predicates;
 
-    Tuple(String name, ImmutableList<String> spans, ImmutableList<Argument> arguments) {
+    Tuple(String name, ImmutableList<String> spans, ImmutableList<Argument> predicates) {
         this.name = name;
         this.spans = spans;
-        this.arguments = arguments;
+        this.predicates = predicates;
     }
 
     public int compare(Tuple other) {
         try {
-            int score = 17 * (this.name.equals(other.name)? 0: 1);
+            int score = this.name.equals(other.name)? 17: 0;
             score += scoreLists(spans, other.spans);
-            score += scoreArguments(arguments, other.arguments);
+            score += scoreArguments(predicates, other.predicates);
             return score;
         }
         catch (Exception e) {
@@ -35,11 +34,11 @@ public class Tuple {
     }
 
     private int scoreIsSynonym(String word, String other) throws IOException, SQLException {
-        return word.equalsIgnoreCase(other)?
-                thesaurusService.get(word).getFlatContents().contains(other)?
-                        10:
-                        0:
-                0;
+        if(word.equalsIgnoreCase(other)){
+            return 10;
+        }else{
+            return thesaurusService.get(word).getFlatContents().contains(other) ? 10 : 0;
+        }
     }
 
     private int scoreLists(Iterable<String> spans, Iterable<String> others) throws IOException, SQLException {
@@ -52,10 +51,10 @@ public class Tuple {
             score += scoreIsSynonym(span, other);
         }
         Iterator<String> remaining = spansIterator.hasNext()? spansIterator: othersIterator;
-        while(remaining.hasNext()) {
+/*        while(remaining.hasNext()) {
             remaining.next();
             score -= 10;
-        }
+        }*/
         return score;
     }
 

@@ -1,32 +1,39 @@
 package main;
 
-import java.io.*;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import edu.stanford.nlp.util.Iterables;
 import model.SentenceTuples;
 import model.TupleConverter;
+
+import java.io.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ParaphraseSearcher {
 
     public static void main(String[] args) {
         ParaphraseSearcher paraphraseSearcher = new ParaphraseSearcher();
-        Collection<model.labelled.Sentence> sentences = paraphraseSearcher.loadLabelledSentences("ParaphraseSearcher/data/outParaphrases");
-        Iterable<SentenceTuples> sentenceTuples = TupleConverter.fromSentences(sentences);
-        Iterable<SentenceTuples> sample = Iterables.take(sentenceTuples, 3);
-        Iterator<SentenceTuples> sampleIterator = sample.iterator();
-        sampleIterator.next();
-        int score = sampleIterator.next().compare(sampleIterator.next());
-        System.out.println(score);
+        Collection<model.labelled.Sentence> sentences = paraphraseSearcher.loadLabelledSentences("ParaphraseSearcher/data/outParaphrases_test");
+        List<SentenceTuples> sentenceTuples = TupleConverter.fromSentences(sentences);
+        List<SentenceTuples> sample = sentenceTuples.subList(0, 2);
+
+
+        for (int i=0; i<sample.size(); i++) {
+            for (int j=i+1; j<sample.size(); j++) {
+                if (i==j) {
+                    continue;
+                }
+                SentenceTuples t1 = sample.get(i), t2 = sample.get(j);
+                System.out.println("wynik: " + t1.compare(t2) +" zdania: " + t1.sentence + " : " + t2.sentence);
+            }
+        }
+
+
     }
 
-    public Collection<model.labelled.Sentence> loadLabelledSentences(String filePath){
+
+    public Collection<model.labelled.Sentence> loadLabelledSentences(String filePath) {
 
         LinkedList<model.labelled.Sentence> sentencesList = new LinkedList<>();
 
@@ -41,8 +48,7 @@ public class ParaphraseSearcher {
                 sentencesList.add(sentence);
             }
             buf.close();
-        }
-        catch(IOException  e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
