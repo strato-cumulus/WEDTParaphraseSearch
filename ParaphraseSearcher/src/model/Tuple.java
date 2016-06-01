@@ -11,22 +11,24 @@ public class Tuple {
 
     private ThesaurusService thesaurusService = ThesaurusService.getInstance();
 
-    private final String name;
-    private final ImmutableList<String> spans;
-    private final ImmutableList<Argument> predicates;
+    private final String targetType;
+    private final ImmutableList<String> targetSubjects;
+    private final ImmutableList<Predicate> predicates;
 
-    Tuple(String name, ImmutableList<String> spans, ImmutableList<Argument> predicates) {
-        this.name = name;
-        this.spans = spans;
+    Tuple(String targetType, ImmutableList<String> targetSubjects, ImmutableList<Predicate> predicates) {
+        this.targetType = targetType;
+        this.targetSubjects = targetSubjects;
         this.predicates = predicates;
     }
 
     public int compare(Tuple other) {
         try {
-            int score = this.name.equals(other.name)? 17: 0;
-            score += scoreLists(spans, other.spans);
-            score += scoreArguments(predicates, other.predicates);
-            return score;
+            if(this.targetType.equals(other.targetType)) {
+                int score = 17;
+                score += scoreLists(targetSubjects, other.targetSubjects);
+                return score;
+            }
+            return 0;
         }
         catch (Exception e) {
             return 0;
@@ -58,11 +60,11 @@ public class Tuple {
         return score;
     }
 
-    private int scoreArguments(Iterable<Argument> arguments, Iterable<Argument> others) throws IOException, SQLException {
+    private int scoreArguments(Iterable<Predicate> arguments, Iterable<Predicate> others) throws IOException, SQLException {
         int score = 0;
-        for(Argument argument: arguments) {
-            for(Argument other: others) {
-                score += scoreIsSynonym(argument.name, other.name);
+        for(Predicate predicate : arguments) {
+            for(Predicate other: others) {
+                score += scoreIsSynonym(predicate.type, other.type);
             }
         }
         return score;
