@@ -2,7 +2,7 @@ package main;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import model.SentenceTuples;
+import model.TupledSentence;
 import model.TupleConverter;
 
 import java.io.*;
@@ -14,9 +14,11 @@ public class ParaphraseSearcher {
 
     public static void main(String[] args) {
         ParaphraseSearcher paraphraseSearcher = new ParaphraseSearcher();
-        Collection<model.labelled.Sentence> sentences = paraphraseSearcher.loadLabelledSentences("ParaphraseSearcher/data/outParaphrases_test");
-        List<SentenceTuples> sentenceTuples = TupleConverter.fromSentences(sentences);
-        List<SentenceTuples> sample = sentenceTuples.subList(0, 2);
+        Collection<model.labelled.Sentence> sentences = paraphraseSearcher.loadLabelledSentences("ParaphraseSearcher/data/outParaphrasesTest");
+
+        List<TupledSentence> tupledSentences = TupleConverter.fromSentences(sentences);
+        List<TupledSentence> sample = tupledSentences.subList(0, 2);
+
 
 
         for (int i=0; i<sample.size(); i++) {
@@ -24,8 +26,8 @@ public class ParaphraseSearcher {
                 if (i==j) {
                     continue;
                 }
-                SentenceTuples t1 = sample.get(i), t2 = sample.get(j);
-                System.out.println("wynik: " + t1.compare(t2) +" zdania: " + t1.sentence + " : " + t2.sentence);
+                TupledSentence t1 = sample.get(i), t2 = sample.get(j);
+                //System.out.println("wynik: " + t1.compare(t2) +" zdania: " + t1.sentence + " : " + t2.sentence);
             }
         }
 
