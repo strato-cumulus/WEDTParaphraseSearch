@@ -46,7 +46,7 @@ public class SentenceComparator {
             System.out.println("Wynik: "+returnedScore);
             System.out.println();
         }
-        return comparePaired(pairedTuples);
+        return returnedScore;
 
     }
 
@@ -58,6 +58,7 @@ public class SentenceComparator {
 
         float score = 0;
         float normalizationFactor = 0;
+        float penaltyFactor = 1f;
 
         for (Pair<Tuple, Tuple> pair: pairedTuples)  {
 
@@ -68,8 +69,9 @@ public class SentenceComparator {
                 continue;
             }
             else if(!areSimilar(outer.targetText, inner.targetText)){
-                score /=2;  //duza kara w przypadku gdy zdania maja podobna konstrukcje(te same typy), ale inne argumenty (inan sprawa ze cos nie dziala ta kara xd)
+                penaltyFactor /=2;  //duza kara w przypadku gdy zdania maja podobna konstrukcje(te same typy), ale inne argumenty (inan sprawa ze cos nie dziala ta kara xd)
                 normalizationFactor++;
+                continue;
             }
 
             Iterator<TupleArgument> it1 = outer.arguments.iterator();
@@ -80,18 +82,24 @@ public class SentenceComparator {
                     TupleArgument arg2 = it2.next();
                     if(arg1.argumentType.equalsIgnoreCase(arg2.argumentType)){
                         if(areSimilar(arg1.argumentText, arg2.argumentText)){   //pomyslec nad lepszym algorytmem
-                            score +=1;
-                            it1.remove();   //po tym zostaja tuple ogolocone z argumentow (no chyba ze argumenty sie nie sparowaly)
-                            it2.remove();
+                            score +=1;// * (inner.score + outer.score);
+                            //it1.remove();   //po tym zostaja tuple ogolocone z argumentow (no chyba ze argumenty sie nie sparowaly)
+                            //it2.remove();
                         }
                         normalizationFactor +=1;
                     }
-
                 }
             }
         }
 
-        return score/normalizationFactor;
+        float parserScoreFactor = 0;
+        for(Pair<Tuple, Tuple> p : pairedTuples){
+            parserScoreFactor +=p.getLeft().score;
+            parserScoreFactor +=p.getRight().score;
+        }
+
+
+        return score/**penaltyFactor*//normalizationFactor;///parserScoreFactor;
     }
 
 

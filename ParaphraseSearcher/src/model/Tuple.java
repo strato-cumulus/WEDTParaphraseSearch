@@ -14,13 +14,10 @@ public class Tuple {
 
     public final float score;
 
-
     public Tuple(float score, String targetType, String targetText, List<TupleArgument> arguments) {
         this.score = score;
         this.targetType = targetType;
         this.targetText = targetText;
         this.arguments = arguments;
     }
-
-
 }
