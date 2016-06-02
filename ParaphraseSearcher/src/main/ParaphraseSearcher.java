@@ -19,10 +19,11 @@ public class ParaphraseSearcher {
         Collection<model.labelled.Sentence> sentences = paraphraseSearcher.loadLabelledSentences("ParaphraseSearcher/data/outParaphrasesTest");
 
         List<TupledSentence> tupledSentences = TupleConverter.fromSentences(sentences);
-        List<TupledSentence> sample = tupledSentences.subList(0, 2);
+        List<TupledSentence> sample = tupledSentences.subList(0, 10);
 
-        float score = SentenceComparator.compare(sample.get(0), sample.get(1));
-        //float score1 = SentenceComparator.compare(sample.get(7), sample.get(8));
+        float score = SentenceComparator.compare(sample.get(0), sample.get(1), true );
+        float score1 = SentenceComparator.compare(sample.get(7), sample.get(8), true );
+
 
         for (int i=0; i<sample.size(); i++) {
             for (int j=i+1; j<sample.size(); j++) {

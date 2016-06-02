@@ -4,12 +4,9 @@ package service;
 import model.Tuple;
 import model.TupleArgument;
 import model.TupledSentence;
-import model.labelled.Argument;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,10 +15,10 @@ public class SentenceComparator {
 
     private static ThesaurusService thesaurusService = ThesaurusService.getInstance();
 
-    public static float compare(TupledSentence tupledSentences1, TupledSentence tupledSentences2) {
+    public static float compare(TupledSentence tupledSentence1, TupledSentence tupledSentence2, boolean printResults) {
 
-        List<Tuple> l1 = new ArrayList<>(tupledSentences1.tuples),
-                l2 = new ArrayList<>(tupledSentences2.tuples);
+        List<Tuple> l1 = new ArrayList<>(tupledSentence1.tuples),
+                l2 = new ArrayList<>(tupledSentence2.tuples);
 
         List<Pair<Tuple, Tuple>> pairedTuples = new ArrayList<>();
 
@@ -41,9 +38,16 @@ public class SentenceComparator {
             }
         }
 
+        float returnedScore = comparePaired(pairedTuples); //do rozbudowy
+
+        if(printResults){
+            System.out.println(tupledSentence1.sentence);
+            System.out.println(tupledSentence2.sentence);
+            System.out.println("Wynik: "+returnedScore);
+            System.out.println();
+        }
         return comparePaired(pairedTuples);
 
-        //return 0f;
     }
 
     private static float comparePaired(List<Pair<Tuple, Tuple>> pairedTuples){
@@ -63,6 +67,10 @@ public class SentenceComparator {
                 normalizationFactor+=1;
                 continue;
             }
+            else if(!areSimilar(outer.targetText, inner.targetText)){
+                score /=2;  //duza kara w przypadku gdy zdania maja podobna konstrukcje(te same typy), ale inne argumenty (inan sprawa ze cos nie dziala ta kara xd)
+                normalizationFactor++;
+            }
 
             Iterator<TupleArgument> it1 = outer.arguments.iterator();
             while (it1.hasNext()){
@@ -71,7 +79,7 @@ public class SentenceComparator {
                 while(it2.hasNext()){
                     TupleArgument arg2 = it2.next();
                     if(arg1.argumentType.equalsIgnoreCase(arg2.argumentType)){
-                        if(argumentsEqual(arg1, arg2)){
+                        if(areSimilar(arg1.argumentText, arg2.argumentText)){   //pomyslec nad lepszym algorytmem
                             score +=1;
                             it1.remove();   //po tym zostaja tuple ogolocone z argumentow (no chyba ze argumenty sie nie sparowaly)
                             it2.remove();
@@ -86,10 +94,11 @@ public class SentenceComparator {
         return score/normalizationFactor;
     }
 
-    //przemyslec to jak to ma dzialac
-    private static boolean argumentsEqual(TupleArgument arg1, TupleArgument arg2) {
-        return arg1.argumentText.equalsIgnoreCase(arg2.argumentText)
-                || thesaurusService.get(arg1.argumentText).getFlatContents().contains(arg2.argumentText);
+
+
+    private static boolean areSimilar(String text1, String text2){
+        return text1.equalsIgnoreCase(text2)
+                || thesaurusService.get(text1).getFlatContents().contains(text2);
     }
 
 }
