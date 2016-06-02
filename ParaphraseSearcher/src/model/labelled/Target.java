@@ -9,11 +9,11 @@ import java.util.List;
 
 public class Target {
 
-    @SerializedName("name")
+    @SerializedName("type")
     @Expose
     public String name;
 
-    @SerializedName("spans")
+    @SerializedName("subjects")
     @Expose
     public List<Span> spans = new ArrayList<>();
 

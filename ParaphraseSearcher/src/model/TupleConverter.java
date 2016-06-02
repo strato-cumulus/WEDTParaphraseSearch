@@ -24,17 +24,17 @@ public class TupleConverter {
         for (Frame frame : sentence.frames) {
             String name = frame.target.name;
             ImmutableList<String> spans = fromSpans(frame.target.spans);
-            ImmutableList<Argument> arguments = fromAnnotationSet(frame.annotationSets);
-            builder.add(new Tuple(name, spans, arguments));
+            ImmutableList<Predicate> predicates = fromAnnotationSet(frame.annotationSets);
+            builder.add(new Tuple(name, spans, predicates));
         }
         return new SentenceTuples(String.join(" ", sentence.tokens), builder.build());
     }
 
-    private static ImmutableList<Argument> fromAnnotationSet(Iterable<AnnotationSet> annotationSets) {
-        ImmutableList.Builder<Argument> builder = ImmutableList.builder();
+    private static ImmutableList<Predicate> fromAnnotationSet(Iterable<AnnotationSet> annotationSets) {
+        ImmutableList.Builder<Predicate> builder = ImmutableList.builder();
         for (AnnotationSet annotationSet : annotationSets) {
             for (model.labelled.Argument argument : annotationSet.arguments) {
-                builder.add(new Argument(argument.name, fromSpans(argument.spans)));
+                builder.add(new Predicate(argument.name, fromSpans(argument.spans)));
             }
         }
         return builder.build();

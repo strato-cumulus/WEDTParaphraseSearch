@@ -120,7 +120,7 @@
 ( (S (NP-SBJ (PRP I))
      (VP (MD can)
 	 (VP (VB write)
-	     (NP (PRP$ my) (NN name))
+	     (NP (PRP$ my) (NN infoType))
 	     (PP-LOC (IN on)
 		     (NP (DT the) (NN deposit) (NN slip)))))
      (. .)))
