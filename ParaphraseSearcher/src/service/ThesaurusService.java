@@ -72,6 +72,7 @@ public class ThesaurusService {
             PreparedStatement insertStatement = connection.prepareStatement(insertionQuery);
             insertStatement.setString(1, word);
             insertStatement.setString(2, contents);
+            insertStatement.execute();
         } catch (SQLException | IOException  e) {
             e.printStackTrace();
            /// System.exit(7777);

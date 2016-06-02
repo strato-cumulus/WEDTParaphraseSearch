@@ -16,23 +16,15 @@ public class ParaphraseSearcher {
 
     public static void main(String[] args) {
         ParaphraseSearcher paraphraseSearcher = new ParaphraseSearcher();
-        Collection<model.labelled.Sentence> sentences = paraphraseSearcher.loadLabelledSentences("ParaphraseSearcher/data/file");
+        Collection<model.labelled.Sentence> sentences = paraphraseSearcher.loadLabelledSentences("ParaphraseSearcher/data/file9");
 
         List<TupledSentence> tupledSentences = TupleConverter.fromSentences(sentences);
-        List<TupledSentence> sample = tupledSentences.subList(0, 9);
+        List<TupledSentence> sample = tupledSentences.subList(0, 8);
 
-        for (int i=0; i<sample.size(); i++) {
-            for (int j=i+1; j<sample.size(); j++) {
-                if (i==j) {
-                    continue;
-                }
-                TupledSentence t1 = sample.get(i), t2 = sample.get(j);
-                SentenceComparator.compare(sample.get(i), sample.get(j), true);
-            }
+        for (int i=0; i<sample.size(); i+=2) {
+            SentenceComparator.compare(sample.get(i), sample.get(i+1), true);
         }
-
-
-    }
+     }
 
 
     public Collection<model.labelled.Sentence> loadLabelledSentences(String filePath) {

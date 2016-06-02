@@ -14,6 +14,8 @@ import java.util.List;
 public class SentenceComparator {
 
     private static ThesaurusService thesaurusService = ThesaurusService.getInstance();
+    private static final float PENALTY_UNPAIRED_TUPLE_COUNT = 0.78f;
+
 
     public static float compare(TupledSentence tupledSentence1, TupledSentence tupledSentence2, boolean printResults) {
 
@@ -38,7 +40,15 @@ public class SentenceComparator {
             }
         }
 
-        float returnedScore = comparePaired(pairedTuples); //do rozbudowy
+
+
+        float penaltyFactor = 1.0f;
+        if(l1.size() > 0 && l2.size() > 0){
+            int unpairedDifference = l1.size() + l2.size();
+            penaltyFactor *= Math.pow(PENALTY_UNPAIRED_TUPLE_COUNT, unpairedDifference);
+        }
+
+        float returnedScore = comparePaired(pairedTuples) * penaltyFactor;
 
         if(printResults){
             System.out.println(tupledSentence1.sentence);
