@@ -1,8 +1,8 @@
 package service;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.google.inject.Singleton;
+import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -37,8 +37,8 @@ public class ThesaurusService {
     private String apiUrl;
     private String requestUrl;
     private Connection connection;
-    private String retrievalQuery = "SELECT synonyms FROM thesaurus_entry WHERE word = '%s'";
-    private String insertionQuery = "INSERT INTO thesaurus_entry VALUES ($$%s$$, $$%s$$)";
+    private String retrievalQuery = "SELECT synonyms FROM thesaurus_entry WHERE word = ?";
+    private String insertionQuery = "INSERT INTO thesaurus_entry VALUES (?, ?)";
 
     private ThesaurusService() throws IOException, SQLException, ClassNotFoundException, IllegalAccessException {
         Properties apiProperties = new Properties();
@@ -50,22 +50,32 @@ public class ThesaurusService {
 
         Properties databaseProperties = new Properties();
         databaseProperties.load(new FileInputStream("ParaphraseSearcher/database.properties"));
-        Class.forName("org.postgresql.Driver");
         connection = DriverManager.getConnection(databaseProperties.getProperty("url"), databaseProperties);
     }
 
-    public ThesaurusEntry get(String word) throws IOException, SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(String.format(retrievalQuery, word));
-        if (resultSet.next()) {
-            return new ThesaurusEntry(gson.fromJson(resultSet.getString(SYNONYMS_COLUMN), ThesaurusEntry.contentsType));
+    public ThesaurusEntry get(String word) {
+        PreparedStatement statement = null;
+        String contents = null;
+        try {
+            statement = connection.prepareStatement(retrievalQuery);
+            statement.setString(1, word);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new ThesaurusEntry(gson.fromJson(resultSet.getString(SYNONYMS_COLUMN), ThesaurusEntry.contentsType));
+            }
+
+            HttpGet get = new HttpGet(URIUtil.encodeQuery(String.format(requestUrl, word)));
+            HttpResponse response = httpClient.execute(target, get);
+            HttpEntity entity = response.getEntity();
+            contents = EntityUtils.toString(entity);
+
+            PreparedStatement insertStatement = connection.prepareStatement(insertionQuery);
+            insertStatement.setString(1, word);
+            insertStatement.setString(2, contents);
+        } catch (SQLException | IOException  e) {
+            e.printStackTrace();
+           /// System.exit(7777);
         }
-        HttpGet get = new HttpGet(String.format(requestUrl, word));
-        HttpResponse response = httpClient.execute(target, get);
-        HttpEntity entity = response.getEntity();
-        String contents = EntityUtils.toString(entity);
-        statement.executeQuery(String.format(insertionQuery, word, contents));
-        connection.commit();
         return new ThesaurusEntry(gson.fromJson(contents, ThesaurusEntry.contentsType));
     }
 

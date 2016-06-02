@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Tuple {
 
-    private ThesaurusService thesaurusService = ThesaurusService.getInstance();
-
     public final String targetType;
 
     public final String targetText;
